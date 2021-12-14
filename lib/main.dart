@@ -1,31 +1,18 @@
 import 'package:covid19app/pages/Latest_statistics.dart';
 import 'package:flutter/cupertino.dart';
-
+import 'package:flutter/material.dart';
 
 void main() {
-  runApp(
-    new CupertinoApp(
+  runApp(MyApp());
+}
 
-
-
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-
-      title: 'USA COVID-19 Coronavirus Statistics',
-
-      theme: CupertinoThemeData(
-
-
-        textTheme: CupertinoTextThemeData(
-
-
-        ),
-
-
-
-      ),
-
-
+      title: 'COVID19USA.com',
       home: lastest_state(),
-    ),
-  );
+    );
+  }
 }
