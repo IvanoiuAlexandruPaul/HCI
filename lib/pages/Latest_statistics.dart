@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/widgets.dart';
 
+import 'dataWidget.dart';
+import 'firstGraphStatistics.dart';
 import 'usadata.dart';
 
 class lastest_state extends StatefulWidget {
@@ -174,6 +176,19 @@ class _lastest_stateState extends State<lastest_state> {
                               );
                             },
                           ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          IconButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          firstGraphStatistics()),
+                                );
+                              },
+                              icon: Icon(Icons.eleven_mp))
                         ],
                       ),
                     );
@@ -279,56 +294,6 @@ class _lastest_stateState extends State<lastest_state> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class dataWidget extends StatelessWidget {
-  String nameToDisplay;
-  String valueToDisplay;
-  AssetImage imageValue;
-  Color colors;
-  dataWidget(
-      this.imageValue, this.nameToDisplay, this.valueToDisplay, this.colors);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-            color: colors,
-            borderRadius: BorderRadius.circular(10),
-            image: DecorationImage(
-              image: imageValue,
-              fit: BoxFit.cover,
-            )),
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 5),
-        child: Column(
-          children: <Widget>[
-            Text(
-              nameToDisplay,
-              style: TextStyle(
-                color: CupertinoColors.white,
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 10),
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              decoration: BoxDecoration(
-                color: CupertinoColors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Text(
-                valueToDisplay,
-                style: TextStyle(
-                    fontWeight: FontWeight.w700, color: CupertinoColors.black),
-              ),
-            ),
-          ],
         ),
       ),
     );

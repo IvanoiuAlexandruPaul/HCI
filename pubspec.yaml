@@ -24,6 +24,8 @@ dependencies:
   url_launcher: ^6.0.17
   share: ^0.6.3+6
   csv: ^4.1.0
+  syncfusion_flutter_charts: ^19.4.38
+  charts_flutter: ^0.12.0
 
 
 
