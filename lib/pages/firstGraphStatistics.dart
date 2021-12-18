@@ -43,46 +43,53 @@ class _firstGraphStatisticsState extends State<firstGraphStatistics> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           //Initialize the chart widget
-          Container(
-            height: 600,
-            alignment: Alignment.center,
-            child: SfCartesianChart(
-              margin: EdgeInsets.all(15),
-              zoomPanBehavior: ZoomPanBehavior(
-                enableDoubleTapZooming: true,
-                enablePinching: true,
-                enableMouseWheelZooming: true,
-                enablePanning: true,
-              ),
-              primaryXAxis: CategoryAxis(
-                labelRotation: 90,
-                labelStyle: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Roboto',
-                    fontSize: 14,
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800),
-              ),
+          Flexible(
+            child: Container(
+              height: 600,
+              alignment: Alignment.center,
+              child: SfCartesianChart(
+                zoomPanBehavior: ZoomPanBehavior(
+                  enableDoubleTapZooming: true,
+                  enablePinching: true,
+                  enableMouseWheelZooming: true,
+                  enablePanning: true,
+                ),
+                primaryXAxis: CategoryAxis(
+                  labelRotation: 90,
+                  labelStyle: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Roboto',
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w200),
+                ),
+                primaryYAxis: CategoryAxis(
+                  labelStyle: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Roboto',
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w800),
+                ),
 
-              // Chart title
-              title: ChartTitle(
-                text: 'USA CASES HISTORY',
-                textStyle: TextStyle(color: CupertinoColors.white),
+                // Chart title
+                title: ChartTitle(
+                  text: 'USA CASES HISTORY',
+                  textStyle: TextStyle(color: CupertinoColors.white),
+                ),
+                // Enable legend
+                legend: Legend(isVisible: false),
+                // Enable tooltip
+                tooltipBehavior: TooltipBehavior(enable: true),
+                series: <ChartSeries<_SalesData, String>>[
+                  LineSeries<_SalesData, String>(
+                      width: 5,
+                      color: CupertinoColors.destructiveRed,
+                      dataSource: data,
+                      xValueMapper: (_SalesData sales, _) => sales.year,
+                      yValueMapper: (_SalesData sales, _) => sales.sales,
+                      // Enable data label
+                      dataLabelSettings: DataLabelSettings(isVisible: false))
+                ],
               ),
-              // Enable legend
-              legend: Legend(isVisible: false),
-              // Enable tooltip
-              tooltipBehavior: TooltipBehavior(enable: true),
-              series: <ChartSeries<_SalesData, String>>[
-                LineSeries<_SalesData, String>(
-                    width: 5,
-                    color: CupertinoColors.destructiveRed,
-                    dataSource: data,
-                    xValueMapper: (_SalesData sales, _) => sales.year,
-                    yValueMapper: (_SalesData sales, _) => sales.sales,
-                    // Enable data label
-                    dataLabelSettings: DataLabelSettings(isVisible: false))
-              ],
             ),
           ),
         ],

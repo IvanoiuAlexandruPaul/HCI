@@ -17,7 +17,7 @@ class lastest_state extends StatefulWidget {
 
 class _lastest_stateState extends State<lastest_state> {
   List<List<dynamic>> _data = [];
-
+  List<DataRow> dataForTable = [];
   // This function is triggered when the floating button is pressed
   void _loadCSV() async {
     final _rawData = await rootBundle.loadString("HCICSV.csv");
@@ -25,6 +25,64 @@ class _lastest_stateState extends State<lastest_state> {
     setState(() {
       _data = _listData;
     });
+
+    for (int i = 0; i < _data.length; i++) {
+      dataForTable.add(
+        DataRow(
+          cells: <DataCell>[
+            DataCell(
+              Text(
+                _data[i][1].toString(),
+                style: TextStyle(
+                    color: CupertinoColors.white, fontWeight: FontWeight.w700),
+              ),
+            ),
+            DataCell(
+              Text(
+                _data[i][3].toString(),
+                style: TextStyle(
+                    color: CupertinoColors.white, fontWeight: FontWeight.w700),
+              ),
+            ),
+            DataCell(
+              Text(
+                _data[i][4].toString(),
+                style: TextStyle(
+                    color: CupertinoColors.white, fontWeight: FontWeight.w700),
+              ),
+            ),
+            DataCell(
+              Text(
+                _data[i][5].toString(),
+                style: TextStyle(
+                    color: CupertinoColors.white, fontWeight: FontWeight.w700),
+              ),
+            ),
+            DataCell(
+              Text(
+                _data[i][6].toString(),
+                style: TextStyle(
+                    color: CupertinoColors.white, fontWeight: FontWeight.w700),
+              ),
+            ),
+            DataCell(
+              Text(
+                _data[i][7].toString(),
+                style: TextStyle(
+                    color: CupertinoColors.white, fontWeight: FontWeight.w700),
+              ),
+            ),
+            DataCell(
+              Text(
+                _data[i][8].toString(),
+                style: TextStyle(
+                    color: CupertinoColors.white, fontWeight: FontWeight.w700),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   @override
@@ -157,38 +215,104 @@ class _lastest_stateState extends State<lastest_state> {
                             height: 40,
                             width: 40,
                           ),
-                          ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemCount: _data.length,
-                            itemBuilder: (_, index) {
-                              return Container(
-                                child: Card(
-                                  margin: const EdgeInsets.all(3),
-                                  color:
-                                      index == 0 ? Colors.amber : Colors.white,
-                                  child: ListTile(
-                                    leading: Text(_data[index][1].toString()),
-                                    title: Text(_data[index][3].toString()),
-                                    trailing: Text(_data[index][5].toString()),
+                          SizedBox(
+                            width: double.infinity,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Center(
+                                  child: Theme(
+                                    data: Theme.of(context)
+                                        .copyWith(dividerColor: Colors.white),
+                                    child: DataTable(
+                                      columnSpacing: 180,
+                                      columns: const <DataColumn>[
+                                        DataColumn(
+                                          label: Text(
+                                            'State Name',
+                                            style: TextStyle(
+                                                color: CupertinoColors.white,
+                                                fontStyle: FontStyle.normal,
+                                                fontWeight: FontWeight.w800),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Cases',
+                                            style: TextStyle(
+                                                color: CupertinoColors.white,
+                                                fontStyle: FontStyle.normal,
+                                                fontWeight: FontWeight.w800),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Death',
+                                            style: TextStyle(
+                                                color: CupertinoColors.white,
+                                                fontStyle: FontStyle.normal,
+                                                fontWeight: FontWeight.w800),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Confirmed Cases',
+                                            style: TextStyle(
+                                                color: CupertinoColors.white,
+                                                fontStyle: FontStyle.normal,
+                                                fontWeight: FontWeight.w800),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Confirmed Death',
+                                            style: TextStyle(
+                                                color: CupertinoColors.white,
+                                                fontStyle: FontStyle.normal,
+                                                fontWeight: FontWeight.w800),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Propable cases',
+                                            style: TextStyle(
+                                                color: CupertinoColors.white,
+                                                fontStyle: FontStyle.normal,
+                                                fontWeight: FontWeight.w800),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Propable Death',
+                                            style: TextStyle(
+                                                color: CupertinoColors.white,
+                                                fontStyle: FontStyle.normal,
+                                                fontWeight: FontWeight.w800),
+                                          ),
+                                        ),
+                                      ],
+                                      rows: dataForTable,
+                                    ),
                                   ),
                                 ),
-                              );
-                            },
+                              ),
+                            ),
                           ),
                           SizedBox(
                             height: 20,
                           ),
                           IconButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          firstGraphStatistics()),
-                                );
-                              },
-                              icon: Icon(Icons.eleven_mp))
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        firstGraphStatistics()),
+                              );
+                            },
+                            icon: Icon(Icons.eleven_mp),
+                          ),
                         ],
                       ),
                     );

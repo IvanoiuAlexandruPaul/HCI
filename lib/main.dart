@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'COVID19USA.com',
       routes: {
         '/': (context) => lastest_state(),
