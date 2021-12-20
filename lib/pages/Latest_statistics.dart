@@ -1,10 +1,15 @@
 import 'package:covid19app/icons/myiconsfile.dart';
+import 'package:covid19app/pages/forthGraphStatistics.dart';
+import 'package:covid19app/pages/secondGraphStatistics.dart';
+import 'package:covid19app/pages/thirdGraphStatistics.dart';
 import 'package:covid19app/pages/usadata.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/widgets.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 
 import 'dataWidget.dart';
 import 'firstGraphStatistics.dart';
@@ -302,16 +307,181 @@ class _lastest_stateState extends State<lastest_state> {
                           SizedBox(
                             height: 20,
                           ),
-                          IconButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        firstGraphStatistics()),
-                              );
-                            },
-                            icon: Icon(Icons.eleven_mp),
+                          Container(
+                            margin: EdgeInsets.only(bottom: 20),
+                            decoration: BoxDecoration(
+                                color: CupertinoColors.label
+                                    .resolveFrom(context)
+                                    .withOpacity(0.12),
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  image: AssetImage('imgs/map.png'),
+                                  fit: BoxFit.cover,
+                                )),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 14, horizontal: 20),
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                  "Total Cases | Daily Cases Graph",
+                                  style: TextStyle(
+                                    color:
+                                        CupertinoColors.white.withOpacity(0.8),
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 20),
+                                  decoration: BoxDecoration(
+                                    color: CupertinoColors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Get.to(firstGraphStatistics());
+                                    },
+                                    child: Text('Go'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(bottom: 20),
+                            decoration: BoxDecoration(
+                                color: CupertinoColors.label
+                                    .resolveFrom(context)
+                                    .withOpacity(0.12),
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  image: AssetImage('imgs/map.png'),
+                                  fit: BoxFit.cover,
+                                )),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 14, horizontal: 20),
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                  "Hospitalized Graph",
+                                  style: TextStyle(
+                                    color:
+                                        CupertinoColors.white.withOpacity(0.8),
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 20),
+                                  decoration: BoxDecoration(
+                                    color: CupertinoColors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Get.to(secondGraphStatistics());
+                                    },
+                                    child: Text('Go'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(bottom: 20),
+                            decoration: BoxDecoration(
+                                color: CupertinoColors.label
+                                    .resolveFrom(context)
+                                    .withOpacity(0.12),
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  image: AssetImage('imgs/map.png'),
+                                  fit: BoxFit.cover,
+                                )),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 14, horizontal: 20),
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                  "Death Graph",
+                                  style: TextStyle(
+                                    color:
+                                        CupertinoColors.white.withOpacity(0.8),
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 20),
+                                  decoration: BoxDecoration(
+                                    color: CupertinoColors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Get.to(thirdGraphStatistics());
+                                    },
+                                    child: Text('Go'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(bottom: 20),
+                            decoration: BoxDecoration(
+                                color: CupertinoColors.label
+                                    .resolveFrom(context)
+                                    .withOpacity(0.12),
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  image: AssetImage('imgs/map.png'),
+                                  fit: BoxFit.cover,
+                                )),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 14, horizontal: 20),
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                  "Vaccinated Graph",
+                                  style: TextStyle(
+                                    color:
+                                        CupertinoColors.white.withOpacity(0.8),
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 20),
+                                  decoration: BoxDecoration(
+                                    color: CupertinoColors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Get.to(forthGraphStatistics());
+                                    },
+                                    child: Text('Go'),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),

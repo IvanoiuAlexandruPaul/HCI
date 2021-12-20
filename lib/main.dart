@@ -6,15 +6,18 @@ import 'package:covid19app/pages/secondGraphStatistics.dart';
 import 'package:covid19app/pages/thirdGraphStatistics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(GetMaterialApp(
+    home: lastest_state(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'COVID19USA.com',
       routes: {
         '/': (context) => lastest_state(),

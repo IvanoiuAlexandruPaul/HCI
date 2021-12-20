@@ -62,13 +62,6 @@ class _firstGraphStatisticsState extends State<firstGraphStatistics> {
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w200),
                 ),
-                primaryYAxis: CategoryAxis(
-                  labelStyle: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Roboto',
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w800),
-                ),
 
                 // Chart title
                 title: ChartTitle(
