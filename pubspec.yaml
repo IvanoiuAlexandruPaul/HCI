@@ -76,6 +76,9 @@ flutter:
     - family:  Soshal
       fonts:
         - asset: fonts/Soshal.ttf
+    - family: SF
+      fonts:
+        - asset: fonts/sflight.ttf
 
   #   - family: Schyler
   #     fonts:

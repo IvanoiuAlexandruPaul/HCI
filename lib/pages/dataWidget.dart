@@ -13,23 +13,22 @@ class dataWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
+        height: 150,
         decoration: BoxDecoration(
-            color: colors,
-            borderRadius: BorderRadius.circular(10),
-            image: DecorationImage(
-              image: imageValue,
-              fit: BoxFit.cover,
-            )),
+          color: colors,
+          borderRadius: BorderRadius.circular(10),
+        ),
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 5),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               nameToDisplay,
               style: TextStyle(
-                color: CupertinoColors.white,
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
-              ),
+                  color: Color(0xff000000),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 40,
+                  fontFamily: 'SF'),
             ),
             Container(
               margin: EdgeInsets.only(top: 10),
@@ -41,7 +40,9 @@ class dataWidget extends StatelessWidget {
               child: Text(
                 valueToDisplay,
                 style: TextStyle(
-                    fontWeight: FontWeight.w700, color: CupertinoColors.black),
+                    fontWeight: FontWeight.w900,
+                    color: CupertinoColors.black,
+                    fontFamily: 'SF'),
               ),
             ),
           ],

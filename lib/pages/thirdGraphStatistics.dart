@@ -1,98 +1,75 @@
-import 'package:csv/csv.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class thirdGraphStatistics extends StatefulWidget {
-  const thirdGraphStatistics({Key key}) : super(key: key);
-
-  @override
-  _thirdGraphStatisticsState createState() => _thirdGraphStatisticsState();
+void main() {
+  return runApp(thirdGraphStatistics());
 }
 
-class _thirdGraphStatisticsState extends State<thirdGraphStatistics> {
-  List<List<dynamic>> _dataToDisplay = [];
-  List<_SalesData> data = [];
-
-  void _loadCSV() async {
-    final _rawData = await rootBundle.loadString("USA_death.csv");
-    List<List<dynamic>> _listData = CsvToListConverter().convert(_rawData);
-    setState(() {
-      _dataToDisplay = _listData;
-    });
-
-    for (int i = 0; i < _dataToDisplay.length; i++) {
-      data.add(_SalesData(_dataToDisplay[i][0], _dataToDisplay[i][1]));
-    }
+class thirdGraphStatistics extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: _MyHomePage(),
+    );
   }
+}
+
+class _MyHomePage extends StatefulWidget {
+  // ignore: prefer_const_constructors_in_immutables
+  _MyHomePage({Key key}) : super(key: key);
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<_MyHomePage> {
+  List<_ChartData> data;
+  TooltipBehavior _tooltip;
 
   @override
   void initState() {
-    // TODO: implement initState
+    data = [
+      _ChartData('Fully Vaccinated', 202358902),
+      _ChartData('At least one dose', 241571082),
+      _ChartData('Death', 804266),
+    ];
+    _tooltip = TooltipBehavior(enable: true);
     super.initState();
-    _loadCSV();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CupertinoColors.darkBackgroundGray,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          //Initialize the chart widget
-          Flexible(
-            child: Container(
-              height: 600,
-              alignment: Alignment.center,
-              child: SfCartesianChart(
-                zoomPanBehavior: ZoomPanBehavior(
-                  enableDoubleTapZooming: true,
-                  enablePinching: true,
-                  enableMouseWheelZooming: true,
-                  enablePanning: true,
-                ),
-                primaryXAxis: CategoryAxis(
-                  labelRotation: 90,
-                  labelStyle: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Roboto',
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w200),
-                ),
-
-                // Chart title
-                title: ChartTitle(
-                  text: 'USA DEATH HISTORY',
-                  textStyle: TextStyle(color: CupertinoColors.white),
-                ),
-                // Enable legend
-                legend: Legend(isVisible: false),
-                // Enable tooltip
-                tooltipBehavior: TooltipBehavior(enable: true),
-                series: <ChartSeries<_SalesData, String>>[
-                  LineSeries<_SalesData, String>(
-                      width: 5,
-                      color: CupertinoColors.destructiveRed,
-                      dataSource: data,
-                      xValueMapper: (_SalesData sales, _) => sales.year,
-                      yValueMapper: (_SalesData sales, _) => sales.sales,
-                      // Enable data label
-                      dataLabelSettings: DataLabelSettings(isVisible: false))
-                ],
-              ),
-            ),
-          ),
+      body: SfCartesianChart(
+        legend: Legend(
+          position: LegendPosition.bottom,
+          isVisible: true,
+        ),
+        backgroundColor: CupertinoColors.darkBackgroundGray,
+        primaryXAxis: CategoryAxis(),
+        primaryYAxis:
+            NumericAxis(minimum: 0, maximum: 300000000, interval: 100000000),
+        tooltipBehavior: _tooltip,
+        series: <ChartSeries<_ChartData, String>>[
+          BubbleSeries<_ChartData, String>(
+              minimumRadius: 25,
+              maximumRadius: 100,
+              dataSource: data,
+              xValueMapper: (_ChartData data, _) => data.x,
+              yValueMapper: (_ChartData data, _) => data.y,
+              name: 'VaccinatedPeople / Death Situation',
+              color: Colors.amber)
         ],
       ),
     );
   }
 }
 
-class _SalesData {
-  _SalesData(this.year, this.sales);
+class _ChartData {
+  _ChartData(this.x, this.y);
 
-  final String year;
-  final int sales;
+  final String x;
+  final double y;
 }

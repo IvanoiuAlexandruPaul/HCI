@@ -5,48 +5,63 @@ import 'package:flutter/services.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class forthGraphStatistics extends StatefulWidget {
-  const forthGraphStatistics({Key key}) : super(key: key);
+  forthGraphStatistics({Key key}) : super(key: key);
 
   @override
   _forthGraphStatisticsState createState() => _forthGraphStatisticsState();
 }
 
 class _forthGraphStatisticsState extends State<forthGraphStatistics> {
-  List<List<dynamic>> _dataToDisplay = [];
-  List<_SalesData> data = [];
+  TooltipBehavior _tooltipBehavior;
+  List<List<dynamic>> _data = [];
+  List<DataRow> dataForTable = [];
+  List<ExpenseData> chartData = [];
+  List<_ChartData> data;
+  TooltipBehavior _tooltip;
 
-  void _loadCSV() async {
-    final _rawData = await rootBundle.loadString("USA_vaccinated.csv");
+  void _loadCSV3() async {
+    final _rawData = await rootBundle.loadString("vaccompanies.csv");
     List<List<dynamic>> _listData = CsvToListConverter().convert(_rawData);
     setState(() {
-      _dataToDisplay = _listData;
+      _data = _listData;
     });
 
-    for (int i = 0; i < _dataToDisplay.length; i++) {
-      data.add(_SalesData(_dataToDisplay[i][0], _dataToDisplay[i][1]));
+    for (int i = 0; i < _data.length; i++) {
+      chartData
+          .add(ExpenseData(_data[i][0], _data[i][1], _data[i][2], _data[i][3]));
     }
   }
 
   @override
   void initState() {
-    // TODO: implement initState
+    _loadCSV3();
+    data = [
+      _ChartData('Fully Vaccinated', 202358902),
+      _ChartData('At least one dose', 241571082),
+      _ChartData('Death', 804266),
+    ];
+    _tooltipBehavior = TooltipBehavior(enable: true);
     super.initState();
-    _loadCSV();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: CupertinoColors.darkBackgroundGray,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          //Initialize the chart widget
-          Flexible(
-            child: Container(
-              height: 600,
-              alignment: Alignment.center,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: CupertinoColors.darkBackgroundGray,
+        body: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.only(
+                  left: 20.0, top: 10.0, right: 20.0, bottom: 10.0),
+              decoration: BoxDecoration(
+                color: Color(0xff292929),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              height: MediaQuery.of(context).size.height / 2,
+              width: MediaQuery.of(context).size.width,
               child: SfCartesianChart(
+                plotAreaBackgroundColor: Colors.black12,
                 zoomPanBehavior: ZoomPanBehavior(
                   enableDoubleTapZooming: true,
                   enablePinching: true,
@@ -57,42 +72,77 @@ class _forthGraphStatisticsState extends State<forthGraphStatistics> {
                   labelRotation: 90,
                   labelStyle: TextStyle(
                       color: Colors.white,
-                      fontFamily: 'Roboto',
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w200),
+                      fontFamily: 'SF',
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800),
                 ),
-
-                // Chart title
                 title: ChartTitle(
-                  text: 'USA CASES HISTORY',
-                  textStyle: TextStyle(color: CupertinoColors.white),
+                  text: 'USA VACCINATION COMPANIES',
+                  textStyle: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'SF',
+                      fontSize: 25,
+                      fontWeight: FontWeight.w800),
                 ),
-                // Enable legend
-                legend: Legend(isVisible: false),
-                // Enable tooltip
-                tooltipBehavior: TooltipBehavior(enable: true),
-                series: <ChartSeries<_SalesData, String>>[
-                  LineSeries<_SalesData, String>(
-                      width: 5,
-                      color: CupertinoColors.destructiveRed,
-                      dataSource: data,
-                      xValueMapper: (_SalesData sales, _) => sales.year,
-                      yValueMapper: (_SalesData sales, _) => sales.sales,
-                      // Enable data label
-                      dataLabelSettings: DataLabelSettings(isVisible: false))
+                legend: Legend(
+                  isVisible: true,
+                  textStyle: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'SF',
+                      fontSize: 25,
+                      fontWeight: FontWeight.w800),
+                ),
+                tooltipBehavior: _tooltipBehavior,
+                series: <ChartSeries>[
+                  StackedArea100Series<ExpenseData, String>(
+                      dataSource: chartData,
+                      xValueMapper: (ExpenseData exp, _) => exp.expenseCategory,
+                      yValueMapper: (ExpenseData exp, _) => exp.father,
+                      name: 'Pfizer/BioNTech',
+                      markerSettings: MarkerSettings(
+                        color: Colors.white,
+                        isVisible: true,
+                      )),
+                  StackedArea100Series<ExpenseData, String>(
+                      dataSource: chartData,
+                      xValueMapper: (ExpenseData exp, _) => exp.expenseCategory,
+                      yValueMapper: (ExpenseData exp, _) => exp.mother,
+                      name: 'Moderna',
+                      markerSettings: MarkerSettings(
+                        color: Colors.white,
+                        isVisible: true,
+                      )),
+                  StackedArea100Series<ExpenseData, String>(
+                    dataSource: chartData,
+                    xValueMapper: (ExpenseData exp, _) => exp.expenseCategory,
+                    yValueMapper: (ExpenseData exp, _) => exp.son,
+                    name: 'Johnson&Johnson',
+                    markerSettings: MarkerSettings(
+                      color: Colors.white,
+                      isVisible: true,
+                    ),
+                  ),
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
 
-class _SalesData {
-  _SalesData(this.year, this.sales);
+class ExpenseData {
+  ExpenseData(this.expenseCategory, this.father, this.mother, this.son);
+  final String expenseCategory;
+  final num father;
+  final num mother;
+  final num son;
+}
 
-  final String year;
-  final int sales;
+class _ChartData {
+  _ChartData(this.x, this.y);
+
+  final String x;
+  final double y;
 }
