@@ -1,7 +1,7 @@
-import 'package:covid19app/icons/myiconsfile.dart';
-import 'package:covid19app/pages/usadata.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hciprojectversion2/pages/myiconfiles.dart';
+import 'package:hciprojectversion2/pages/usadata.dart';
 
 import 'dataRowLive.dart';
 

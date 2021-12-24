@@ -1,5 +1,9 @@
-name: covid19app
-description: Covid-19 app Open source
+name: hciprojectversion2
+description: A new Flutter project.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -27,7 +31,7 @@ dependencies:
   syncfusion_flutter_charts: ^19.4.38
   charts_flutter: ^0.12.0
   get: ^4.6.1
-
+  material: ^1.0.0
 
 
 

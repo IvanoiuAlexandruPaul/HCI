@@ -1,7 +1,3 @@
-import 'package:covid19app/pages/firstGraphStatistics.dart';
-import 'package:covid19app/pages/forthGraphStatistics.dart';
-import 'package:covid19app/pages/secondGraphStatistics.dart';
-import 'package:covid19app/pages/statebystate.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +5,12 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/widgets.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:hciprojectversion2/pages/secondGraphStatistics.dart';
+import 'package:hciprojectversion2/pages/statebystate.dart';
 
 import 'dataLiveFeature.dart';
+import 'firstGraphStatistics.dart';
+import 'forthGraphStatistics.dart';
 
 class lastest_state extends StatefulWidget {
   @override
