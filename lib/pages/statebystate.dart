@@ -88,7 +88,7 @@ class statebystate extends StatelessWidget {
                     ),
                     DataColumn(
                       label: Text(
-                        'Propable cases',
+                        'Probable cases',
                         style: TextStyle(
                           color: CupertinoColors.white,
                           fontStyle: FontStyle.normal,
@@ -99,7 +99,7 @@ class statebystate extends StatelessWidget {
                     ),
                     DataColumn(
                       label: Text(
-                        'Propable Death',
+                        'Probable Death',
                         style: TextStyle(
                           color: CupertinoColors.white,
                           fontStyle: FontStyle.normal,

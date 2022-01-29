@@ -3,14 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/widgets.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:hciprojectversion2/pages/secondGraphStatistics.dart';
 import 'package:hciprojectversion2/pages/statebystate.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'dataLiveFeature.dart';
-import 'firstGraphStatistics.dart';
-import 'forthGraphStatistics.dart';
 
 class lastest_state extends StatefulWidget {
   @override
@@ -148,7 +144,7 @@ class _lastest_stateState extends State<lastest_state> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      "Daily Cases | Historical Cases 2020 - 2021",
+                      "COVID Cases State by State",
                       style: TextStyle(
                         color: CupertinoColors.white,
                         fontWeight: FontWeight.w900,
@@ -165,7 +161,7 @@ class _lastest_stateState extends State<lastest_state> {
                       ),
                       child: TextButton(
                         onPressed: () {
-                          Get.to(firstGraphStatistics());
+                          _launchURLG1();
                         },
                         child: Text(
                           'Go',
@@ -195,7 +191,7 @@ class _lastest_stateState extends State<lastest_state> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      "2020 - 2021 Data comparisons | Deaths | Cases | Hospitalized",
+                      "Historic pharmaceutical companies",
                       style: TextStyle(
                         color: CupertinoColors.white,
                         fontWeight: FontWeight.w900,
@@ -212,7 +208,7 @@ class _lastest_stateState extends State<lastest_state> {
                       ),
                       child: TextButton(
                         onPressed: () {
-                          Get.to(secondGraphStatistics());
+                          _launchURLG2();
                         },
                         child: Text(
                           'Go',
@@ -242,7 +238,7 @@ class _lastest_stateState extends State<lastest_state> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      "Vaccinated Situation based on the pharmaceutical company",
+                      "Vaccination's Percentage",
                       style: TextStyle(
                         color: CupertinoColors.white,
                         fontWeight: FontWeight.w900,
@@ -259,7 +255,101 @@ class _lastest_stateState extends State<lastest_state> {
                       ),
                       child: TextButton(
                         onPressed: () {
-                          Get.to(forthGraphStatistics());
+                          _launchURLG3();
+                        },
+                        child: Text(
+                          'Go',
+                          style: TextStyle(
+                            color: CupertinoColors.black,
+                            fontWeight: FontWeight.w900,
+                            fontFamily: "SF",
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(
+                    left: 20.0, top: 10.0, right: 20.0, bottom: 10.0),
+                decoration: BoxDecoration(
+                  color: Color(0xff3A3A3C),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                padding: EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      "Report Dead Vaccinations",
+                      style: TextStyle(
+                        color: CupertinoColors.white,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: "SF",
+                        fontSize: 20,
+                      ),
+                    ),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      decoration: BoxDecoration(
+                        color: CupertinoColors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          _launchURLG4();
+                        },
+                        child: Text(
+                          'Go',
+                          style: TextStyle(
+                            color: CupertinoColors.black,
+                            fontWeight: FontWeight.w900,
+                            fontFamily: "SF",
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(
+                    left: 20.0, top: 10.0, right: 20.0, bottom: 10.0),
+                decoration: BoxDecoration(
+                  color: Color(0xff3A3A3C),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                padding: EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      "COVID Cases by State",
+                      style: TextStyle(
+                        color: CupertinoColors.white,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: "SF",
+                        fontSize: 20,
+                      ),
+                    ),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      decoration: BoxDecoration(
+                        color: CupertinoColors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          _launchURLG5();
                         },
                         child: Text(
                           'Go',
@@ -293,4 +383,28 @@ class LinearSales {
   final int sales;
 
   LinearSales(this.year, this.sales);
+}
+
+void _launchURLG1() async {
+  launch("https://public.flourish.studio/visualisation/8247644/");
+}
+
+void _launchURLG2() async {
+  launch("https://public.flourish.studio/visualisation/8244480/");
+}
+
+void _launchURLG3() async {
+  launch("https://public.flourish.studio/visualisation/8251836/");
+}
+
+void _launchURLG4() async {
+  launch("https://public.flourish.studio/visualisation/8252560/");
+}
+
+void _launchURLG5() async {
+  launch("https://public.flourish.studio/visualisation/8318493/");
+}
+
+void _launchURLG6() async {
+  launch("https://public.flourish.studio/visualisation/8318493/");
 }
